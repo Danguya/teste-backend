@@ -1,40 +1,28 @@
 # Especificações do Projeto de Gerenciamento de Tarefas
 
-## Requisitos Funcionais
+## RFs (Requisitos Funcionais)
 
-[ ] - **RF1:** Usuários podem criar, atualizar e excluir tarefas.
-  [ ] - **RF1.1:** Usuários podem criar tarefas.
-  [ ] - **RF1.2:** Usuários podem atualizar tarefas.
-  [ ] - **RF1.3:** Usuários podem excluir tarefas.
-  [ ] - **RF1.4:** Cada tarefa deve ter um título e uma descrição.
+- [ ] Deve ser possível criar tarefas com título e descrição.
+- [ ] Deve ser possível atualizar tarefas.
+- [ ] Deve ser possível excluir tarefas.
+- [ ] Deve ser possível visualizar todas as tarefas em uma lista.
+- [ ] Deve ser possível implementar paginação na listagem de tarefas.
+- [ ] Deve ser possível buscar tarefas por título.
+- [ ] Deve ser possível filtrar tarefas na listagem.
+- [ ] Deve ser possível implementar autenticação de usuários.
 
-[ ] - **RF2:** Usuários podem visualizar todas as tarefas em uma lista.
-  [ ] - **RF2.1:** Implementar paginação na listagem de tarefas.
+## RNs (Regras de Negócio)
 
-[ ] - **RF3:** Usuários podem buscar e filtrar tarefas na listagem.
-  [ ] - **RF3.1:** Busca por título.
-  [ ] - **RF3.2:** Filtros aplicáveis na listagem.
+- [ ] A tarefa só pode ser atualizada ou excluída pelo usuário que a criou.
+- [ ] Tarefas devem ter um título e uma descrição para serem criadas.
+- [ ] O acesso para criar, atualizar e excluir tarefas é restrito a usuários autenticados.
+- [ ] A paginação da listagem de tarefas deve conter 20 itens por página.
+- [ ] A busca e os filtros na listagem de tarefas devem ser insensíveis a maiúsculas e minúsculas.
 
-[ ] - **RF4:** Implementar autenticação de usuários.
+## RNFs (Requisitos Não Funcionais)
 
-
-## Regras de Negócio
-
-[ ] - **RN1:** Validação de dados obrigatórios e formatação para tarefas.
-  [ ] - **RN1.1:** Título (mínimo de 3 caracteres) e descrição são obrigatórios.
-
-[ ] - **RN2:** Acesso às funcionalidades conforme autenticação.
-  [ ] - **RN2.1:** Somente usuários autenticados podem criar, atualizar ou excluir tarefas.
-  [ ] - **RN2.2:** Visualização de tarefas disponível para não autenticados.
-
-[ ] - **RN3:** Armazenamento de tarefas no Banco de Dados Acebasse com ID único.
-
-[ ] - **RN4:** Suporte a paginação e busca insensível a maiúsculas/minúsculas na listagem de tarefas.
-
-
-## Requisitos Não Funcionais
-
-[ ] - **RNF1:** Interface do usuário com React.js e Material UI.
-[ ] - **RNF2:** Segurança na autenticação e na validação de dados.
-[ ] - **RNF3:** Desempenho: respostas em até 2 segundos.
-[ ] - **RNF4:** Uso de Node.js, TypeScript, Banco de Dados Acebasse, e Express no back-end.
+- [ ] A interface do usuário deve ser desenvolvida utilizando React.js e Material UI.
+- [ ] O sistema deve validar os dados do usuário tanto no front-end quanto no back-end.
+- [ ] As respostas das requisições ao servidor devem ocorrer em até 2 segundos.
+- [ ] A aplicação deve implementar segurança na autenticação dos usuários com JWT (JSON WEB TOKEN).
+- [ ] O back-end deve ser desenvolvido em Node.js, TypeScript, utilizando o Banco de Dados Acebasse e Express.
