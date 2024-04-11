@@ -1,19 +1,19 @@
 import { UsersRepository } from '@/repositories/users'
 import { hash } from 'bcryptjs'
-import { UserAlreadyExistsError } from './errors/user-already-exists-error'
+import { UserAlreadyExistsError } from '../errors/user-already-exists-error'
 import { User } from '@/types/users'
 
-interface RegisterUseCaseRequest {
+interface UserUseCaseRequest {
   name: string
   email: string
   password: string
 }
 
-interface RegisterUseCaseResponse {
+interface UserUseCaseResponse {
   user: User
 }
 
-export class RegisterUseCase {
+export class UserUseCase {
   // eslint-disable-next-line prettier/prettier
   constructor(private usersRepository: UsersRepository) { }
 
@@ -21,7 +21,7 @@ export class RegisterUseCase {
     name,
     email,
     password,
-  }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
+  }: UserUseCaseRequest): Promise<UserUseCaseResponse> {
     const password_hash = await hash(password, 6)
 
     const userWithSameEmail = await this.usersRepository.findByEmail(email)
