@@ -9,8 +9,8 @@
 - [x] Deve ser possível visualizar todas as tarefas em uma lista.
 - [x] Deve ser possível implementar paginação na listagem de tarefas.
 - [x] Deve ser possível buscar tarefas por título.
-- [ ] Deve ser possível filtrar tarefas na listagem.
-- [ ] Deve ser possível implementar autenticação de usuários.
+- [x] Deve ser possível filtrar tarefas na listagem.
+- [x] Deve ser possível implementar autenticação de usuários.
 
 ## RNs (Regras de Negócio)
 
@@ -24,9 +24,9 @@
 
 - [ ] A interface do usuário deve ser desenvolvida utilizando React.js e Material UI.
 - [ ] O sistema deve validar os dados do usuário tanto no front-end quanto no back-end.
-- [ ] A aplicação deve implementar segurança na autenticação dos usuários com JWT (JSON WEB TOKEN).
+- [x] A aplicação deve implementar segurança na autenticação dos usuários com JWT (JSON WEB TOKEN).
 - [x] O back-end deve ser desenvolvido em Node.js, TypeScript, utilizando o Banco de Dados Acebasse e Express.
-- [ ] A senha do usuário precisa estar criptografada.
-- [ ] Os dados da aplicação precisam estar persistidos em um banco Acebase.
+- [x] A senha do usuário precisa estar criptografada.
+- [x] Os dados da aplicação precisam estar persistidos em um banco Acebase.
 - [x] Todas listas de dados precisam estar paginadas com 20 itens por página.
-- [ ] O usuário deve ser identificado por um JWT(JSON WEB TOKEN).
+- [x] O usuário deve ser identificado por um JWT(JSON WEB TOKEN).
