@@ -22,7 +22,8 @@ export function sanitizeMiddleware(
   // Sanitização contra XSS
   for (const key in req.query) {
     if (req.query.hasOwnProperty(key)) {
-      req.query[key] = xss(req.query[key])
+      const value = req.query[key] as string
+      req.query[key] = xss(value)
     }
   }
   for (const key in req.body) {

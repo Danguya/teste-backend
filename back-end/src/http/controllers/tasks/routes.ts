@@ -5,13 +5,14 @@ import { updateTasksRoute } from './update'
 import { getTasksRoute } from './getTask'
 import { destroyTasksRoute } from './destroyTask'
 import { searchTasksRoute } from './searchTask'
+import authMiddleware from '@/http/middlewares/auth'
 
 const router = Router()
-router.post('/', createTaskRoute)
-router.get('/', fetchTasksRoute)
-router.get('/search', searchTasksRoute)
-router.get('/:taskId', getTasksRoute)
-router.put('/:taskId', updateTasksRoute)
-router.delete('/:taskId', destroyTasksRoute)
+router.post('/', authMiddleware, createTaskRoute)
+router.get('/', authMiddleware, fetchTasksRoute)
+router.get('/search', authMiddleware, searchTasksRoute)
+router.get('/:taskId', authMiddleware, getTasksRoute)
+router.put('/:taskId', authMiddleware, updateTasksRoute)
+router.delete('/:taskId', authMiddleware, destroyTasksRoute)
 
 export default router
