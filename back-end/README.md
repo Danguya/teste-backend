@@ -14,9 +14,9 @@
 
 ## RNs (Regras de Negócio)
 
-- [ ] A tarefa só pode ser atualizada ou excluída pelo usuário que a criou.
+- [x] A tarefa só pode ser atualizada ou excluída pelo usuário que a criou.
 - [x] Tarefas devem ter um título e uma descrição para serem criadas.
-- [ ] O acesso para criar, atualizar e excluir tarefas é restrito a usuários autenticados.
+- [x] O acesso para criar, atualizar e excluir tarefas é restrito a usuários autenticados.
 - [x] A paginação da listagem de tarefas deve conter 20 itens por página.
 - [x] A busca e os filtros na listagem de tarefas devem ser insensíveis a maiúsculas e minúsculas.
 

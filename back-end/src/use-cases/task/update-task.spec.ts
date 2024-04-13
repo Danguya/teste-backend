@@ -39,6 +39,7 @@ describe('Update Task Use Case', () => {
       title: 'JS',
       description: 'Academia',
       isCompleted: true,
+      userId: '1',
     })
     expect(task.id).toBe('1')
     expect(task.title).toBe('JS')
@@ -66,6 +67,7 @@ describe('Update Task Use Case', () => {
         title: '',
         description: 'Academia',
         isCompleted: true,
+        userId: '1',
       }),
     ).rejects.toBeInstanceOf(EmptyTaskTitleError)
   })
@@ -90,6 +92,7 @@ describe('Update Task Use Case', () => {
         title: 'tarefa',
         description: '',
         isCompleted: true,
+        userId: '1',
       }),
     ).rejects.toBeInstanceOf(EmptyTaskDescriptionError)
   })
@@ -114,6 +117,7 @@ describe('Update Task Use Case', () => {
         title,
         description: 'Academia',
         isCompleted: true,
+        userId: '1',
       }),
     ).rejects.toBeInstanceOf(TaskAlreadyExistsError)
   })

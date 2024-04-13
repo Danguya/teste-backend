@@ -3,10 +3,12 @@ import { ResourceNotFoundError } from '../errors/resource-not-found'
 import { EmptyTaskTitleError } from '../errors/empty-task-title-error'
 import { EmptyTaskDescriptionError } from '../errors/empty-task-description-error'
 import { TaskAlreadyExistsError } from '../errors/task-already-exists-error'
+import { OperationNotPermitedError } from '../errors/operation-not-permited-error'
 
 interface UpdateTaskUseCaseRequest {
   taskId: string
   title?: string
+  userId?: string
   description?: string
   isCompleted?: boolean
 }
@@ -22,11 +24,16 @@ export class UpdateTaskUseCase {
     title,
     isCompleted,
     description,
+    userId,
   }: UpdateTaskUseCaseRequest): Promise<ValidateUpdateTaskUseCaseResponse> {
     const task = await this.tasksRepository.findById(taskId)
 
     if (!task) {
       throw new ResourceNotFoundError()
+    }
+
+    if (task.userId !== userId) {
+      throw new OperationNotPermitedError()
     }
 
     if (title !== undefined && title !== null) {

@@ -14,6 +14,7 @@ export class InMemoryTasksRepository implements TasksRepository {
       id: data.id ?? randomUUID(),
       title: data.title,
       description: data.description,
+      userId: data.userId,
       completed: data.isCompleted ?? false,
       created_at: new Date(),
     }
