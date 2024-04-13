@@ -19,7 +19,6 @@ export async function getTasksRoute(request: Request, response: Response) {
     if (error instanceof ResourceNotFoundError) {
       return response.status(500).json({ message: error.message })
     }
-    console.log(typeof error)
     return response.status(500).send({ message: 'Internal server error.' })
   }
 }

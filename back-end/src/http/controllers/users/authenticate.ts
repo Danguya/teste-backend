@@ -14,7 +14,6 @@ export async function authenticate(request: Request, response: Response) {
     const { email, password } = authenticateBodySchema.parse(request.body)
 
     const authenticateUseCase = makeAuthenticateUseCase()
-
     const { user } = await authenticateUseCase.execute({
       email,
       password,
@@ -41,6 +40,6 @@ export async function authenticate(request: Request, response: Response) {
     if (err instanceof InvalidCredentialsError) {
       return response.status(400).json({ message: err.message })
     }
-    return response.status(500).send(err)
+    return response.status(500).send('err')
   }
 }

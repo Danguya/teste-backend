@@ -22,6 +22,7 @@ export class AcebaseTasksRepository implements TasksRepository {
       title: data.title,
       description: data.description,
       isCompleted: false,
+      userId: data.userId,
       created_at: new Date(),
       updated_at: new Date(),
     }
@@ -59,7 +60,6 @@ export class AcebaseTasksRepository implements TasksRepository {
   async searchMany(query: string, page: number) {
     const pageSize = 20
     const startIndex = (page - 1) * pageSize
-    console.log(query)
     const tasks = await acebase
       .query('tasks')
       .filter('title', 'like', `${query.toString()}*`)

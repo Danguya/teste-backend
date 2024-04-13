@@ -8,7 +8,7 @@ const options = {
 const acebase = new AceBase('database', options)
 
 acebase.ready(() => {
-  console.log('Database ready to use')
+  // console.log('Database ready to use')
 })
 
 export { acebase }

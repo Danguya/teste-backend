@@ -7,6 +7,7 @@ export async function profile(request: Request, response: Response) {
     const userId = request.userId
 
     const getUserProfile = makeGetUserProfileUseCase()
+
     const { user } = await getUserProfile.execute({
       userId,
     })
