@@ -25,16 +25,16 @@ describe('Destroy Task Use Case', () => {
       email: 'john.doe@gmail.com',
       password_hash: '123456',
       name: 'John Doe',
-      id: '1',
+      id: '20',
     })
     await creteTaskUseCase.execute({
       id: '1',
       title: 'Estudar JS',
       description: 'Academia JS',
-      userId: '1',
+      userId: '20',
     })
 
-    await sut.execute({ taskId: '1' })
+    await sut.execute({ taskId: '1', userId: '20' })
 
     await expect(() =>
       getTaskUseCase.execute({ taskId: '3' }),
