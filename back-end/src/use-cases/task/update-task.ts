@@ -6,9 +6,9 @@ import { TaskAlreadyExistsError } from '../errors/task-already-exists-error'
 
 interface UpdateTaskUseCaseRequest {
   taskId: string
-  title: string
-  description: string
-  isCompleted: boolean
+  title?: string
+  description?: string
+  isCompleted?: boolean
 }
 interface ValidateUpdateTaskUseCaseResponse {
   task: Task
@@ -38,6 +38,7 @@ export class UpdateTaskUseCase {
         throw new TaskAlreadyExistsError()
       }
       task.title = title
+      task.updated_at = new Date()
     }
 
     if (description !== undefined && description !== null) {
@@ -45,12 +46,13 @@ export class UpdateTaskUseCase {
         throw new EmptyTaskDescriptionError()
       }
       task.description = description
+      task.updated_at = new Date()
     }
 
     if (isCompleted !== undefined && isCompleted !== null) {
       task.isCompleted = isCompleted
+      task.updated_at = new Date()
     }
-
     await this.tasksRepository.save(task)
 
     return {

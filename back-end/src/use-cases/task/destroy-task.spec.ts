@@ -27,7 +27,7 @@ describe('Destroy Task Use Case', () => {
     await sut.execute({ taskId: '1' })
 
     await expect(() =>
-      getTaskUseCase.execute({ taskId: '1' }),
+      getTaskUseCase.execute({ taskId: '3' }),
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })
 })
