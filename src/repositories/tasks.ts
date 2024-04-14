@@ -15,5 +15,5 @@ export interface TasksRepository {
   searchMany(query: string, page: number): Promise<Task[]>
   destroy(id: string): Promise<void>
   save(task: Task): Promise<Task>
-  findAll(page: number, pageSize: number): Promise<Task[]>
+  findAll(page: number, pageSize: number, userId: string): Promise<Task[]>
 }

@@ -32,6 +32,7 @@ export async function register(request: Request, response: Response) {
     if (err instanceof InvalidCredentialsError) {
       return response.status(409).send({ message: err.message })
     }
+    console.log(err)
     return response.status(500).send()
   }
 

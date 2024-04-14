@@ -97,24 +97,29 @@ describe('Update Task Use Case', () => {
     ).rejects.toBeInstanceOf(EmptyTaskDescriptionError)
   })
 
-  it('should not be able to create a task with same title twice', async () => {
+  it('should not be able to update a task with same exist title twice', async () => {
     await usersRepository.create({
       email: 'john.doe@gmail.com',
       password_hash: '123456',
       name: 'John Doe',
       id: '1',
     })
-    const title = 'Estudar JS'
     await sut.execute({
       id: '1',
-      title,
+      title: 'Tarefa 1',
+      description: 'Academia JS',
+      userId: '1',
+    })
+    await sut.execute({
+      id: '2',
+      title: 'Tarefa 2',
       description: 'Academia JS',
       userId: '1',
     })
     await expect(() =>
       updateTaskUse.execute({
-        taskId: '1',
-        title,
+        taskId: '2',
+        title: 'Tarefa 1',
         description: 'Academia',
         isCompleted: true,
         userId: '1',

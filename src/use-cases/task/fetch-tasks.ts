@@ -3,6 +3,7 @@ import { Task, TasksRepository } from '@/repositories/tasks'
 interface FetchTasksUseCaseRequest {
   page: number
   pageSize: number
+  userId: string
 }
 
 interface FetchTasksUseCaseResponse {
@@ -15,8 +16,9 @@ export class FetchTasksUseCase {
   async execute({
     page,
     pageSize,
+    userId,
   }: FetchTasksUseCaseRequest): Promise<FetchTasksUseCaseResponse> {
-    const tasks = await this.tasksRepository.findAll(page, pageSize)
+    const tasks = await this.tasksRepository.findAll(page, pageSize, userId)
 
     return {
       tasks,

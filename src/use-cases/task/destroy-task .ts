@@ -18,6 +18,7 @@ export class DestroyTaskUseCase {
     }
 
     if (task.userId !== userId) {
+      console.log(task.userId, userId)
       throw new OperationNotPermitedError()
     }
 

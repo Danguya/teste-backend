@@ -36,7 +36,6 @@ export class AcebaseUsersRepository implements UsersRepository {
       name: data.name,
       email: data.email,
       password_hash: data.password_hash,
-      userId: data.userId,
       created_at: new Date(),
       updated_at: new Date(),
     }
