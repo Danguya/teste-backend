@@ -2,8 +2,14 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } 
 import { useEffect, useState } from "react";
 import { useEditTask } from "../../hooks/useEditTask";
 import * as z from 'zod';
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+interface FormValues {
+  title: string;
+  description: string;
+  taskId: string;
+}
 
 type EditTaskModalProps = {
   open: boolean;
@@ -21,7 +27,7 @@ const schema = z.object({
 function EditTaskModal({ open, handleClose, taskId, initialTitle, initialDescription }: EditTaskModalProps) {
   const [title, setTitle] = useState(initialTitle);
   const [description, setDescription] = useState(initialDescription);
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
   const { mutate } = useEditTask();
@@ -36,7 +42,7 @@ function EditTaskModal({ open, handleClose, taskId, initialTitle, initialDescrip
     reset();
   };
 
-  const onSubmit = (data: { title: string, description: string, taskId: string }) => {
+  const onSubmit: SubmitHandler<FormValues> = (data: { title: string, description: string, taskId: string }) => {
     mutate({taskId: taskId, title: data.title, description: data.description })
     handleClose();
     reset();

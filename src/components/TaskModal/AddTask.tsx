@@ -1,8 +1,14 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from "@mui/material";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useAddTask } from "../../hooks/useAddTask";
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+
+interface FormValues {
+  title: string;
+  description: string;
+  taskId: string;
+}
 
 type AddTaskModalProps = {
   open: boolean;
@@ -15,12 +21,12 @@ const schema = z.object({
 });
 
 function AddTaskModal({ open, handleClose }: AddTaskModalProps) {
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+  const { register, handleSubmit, formState: { errors }, reset } = useForm<FormValues>({
     resolver: zodResolver(schema),
   });
   const { mutate } = useAddTask();
 
-  const onSubmit = (data: { title: string, description: string }) => {
+  const onSubmit: SubmitHandler<FormValues> = (data: { title: string, description: string }) => {
     mutate(data);
     handleClose();
     reset();
