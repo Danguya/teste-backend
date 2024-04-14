@@ -27,7 +27,6 @@ export class UpdateTaskUseCase {
     userId,
   }: UpdateTaskUseCaseRequest): Promise<ValidateUpdateTaskUseCaseResponse> {
     const task = await this.tasksRepository.findById(taskId)
-
     if (!task) {
       throw new ResourceNotFoundError()
     }
@@ -41,7 +40,7 @@ export class UpdateTaskUseCase {
         throw new EmptyTaskTitleError()
       }
       const findTaskByTitle = await this.tasksRepository.findByTitle(title)
-      if (findTaskByTitle) {
+      if (findTaskByTitle?.id !== taskId && findTaskByTitle?.id !== undefined) {
         throw new TaskAlreadyExistsError()
       }
       task.title = title

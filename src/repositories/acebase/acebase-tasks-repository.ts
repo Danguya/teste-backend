@@ -31,11 +31,12 @@ export class AcebaseTasksRepository implements TasksRepository {
     return data
   }
 
-  async findAll(page: number = 1, pageSize: number = 20) {
+  async findAll(page: number = 1, pageSize: number = 20, userId: string) {
     const startIndex = (page - 1) * pageSize
 
     const tasks = await acebase
       .query('tasks')
+      .filter('userId', '==', userId)
       .take(pageSize)
       .skip(startIndex)
       .sort('updated_at', false)

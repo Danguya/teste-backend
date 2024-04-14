@@ -16,12 +16,13 @@ export async function fetchTasksRoute(request: Request, response: Response) {
     const { tasks } = await fetchTasksUseCase.execute({
       page,
       pageSize,
+      userId: request.userId,
     })
 
     return response.status(200).send(tasks)
   } catch (error) {
     if (error instanceof ResourceNotFoundError) {
-      return response.status(500).json({ message: error.message })
+      return response.status(404).json({ message: error.message })
     }
     return response.status(500).send({ message: 'Internal server error.' })
   }
