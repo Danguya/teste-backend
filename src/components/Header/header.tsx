@@ -1,8 +1,9 @@
 import { User, Wrapper } from "./style";
 import avatarImg from '../../assets/avatar.jpg';
-import { useState } from "react";
+import { lazy, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
-import AddTaskModal from "../TaskModal/AddTask";
+
+const AddTaskModal = lazy(()=>import("../TaskModal/AddTask"))
 
 type UserTypes = {
   username: string

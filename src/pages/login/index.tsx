@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, TextField } from '@mui/material';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import { Wrapper } from './style';

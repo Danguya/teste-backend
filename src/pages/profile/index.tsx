@@ -1,12 +1,13 @@
 import { DataGrid, GridCheckCircleIcon, GridColDef, GridDeleteForeverIcon } from '@mui/x-data-grid';
-import Header from '../../components/Header/header';
 import { useUserInformation } from '../../hooks/useUserInformation';
 import { useTasks } from '../../hooks/useTasks';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import UpdateIcon from '@mui/icons-material/Edit';
-import { useState } from 'react';
+import { Suspense, lazy, useState } from 'react';
 import { useDeleteTask } from '../../hooks/useUpdateTask';
-import EditTaskModal from '../../components/TaskModal/EditTask';
+
+const EditTaskModal = lazy(()=> import('../../components/TaskModal/EditTask'));
+const Header = lazy(()=> import('../../components/Header/header'));
 
 
 export default function Profile() {
@@ -101,11 +102,15 @@ export default function Profile() {
 
   return (
     <>
-      <Header user={{
-        email: user.email,
-        username: user.username
-      }} />
+     <Suspense fallback={<p>Carregando Header...</p>}>
+        <Header user={{
+            email: user.email,
+            username: user.username
+          }} />
+      </Suspense>
+
       <div style={{ height: '500px', width: '100%' }}>
+
       <DataGrid
         rows={tasks || []}
         columns={columns}
@@ -116,6 +121,7 @@ export default function Profile() {
         }}
         pageSizeOptions={[10, 20]}
       />
+
     </div>
     <Dialog open={selectedTask.open} onClose={handleCancelDelete}>
       <DialogTitle>Apagar Tarefa</DialogTitle>
@@ -128,17 +134,16 @@ export default function Profile() {
       </DialogActions>
     </Dialog>
 
-    <EditTaskModal
-      handleClose={handleCancelUpdateTask}
-      open={editTask.open}
-      taskId={editTask.taskId}
-      initialTitle={tasks?.find(task => task.id === editTask.taskId)?.title || ""}
-      initialDescription={tasks?.find(task => task.id === editTask.taskId)?.description || ""}
-    />
+    <Suspense fallback={<p>Carregando A Modal...</p>}>
+      <EditTaskModal
+        handleClose={handleCancelUpdateTask}
+        open={editTask.open}
+        taskId={editTask.taskId}
+        initialTitle={tasks?.find(task => task.id === editTask.taskId)?.title || ""}
+        initialDescription={tasks?.find(task => task.id === editTask.taskId)?.description || ""}
+      />
+    </Suspense>
 
     </>
   )
 }
-
-
-
