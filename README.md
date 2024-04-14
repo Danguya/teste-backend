@@ -1,32 +1,30 @@
-# Especificações do Projeto de Gerenciamento de Tarefas
+# React + TypeScript + Vite
 
-## RFs (Requisitos Funcionais)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-- [x] Deve ser possível cadastrar usuários.
-- [x] Deve ser possível criar tarefas com título e descrição.
-- [x] Deve ser possível atualizar tarefas.
-- [x] Deve ser possível excluir tarefas.
-- [x] Deve ser possível visualizar todas as tarefas em uma lista.
-- [x] Deve ser possível implementar paginação na listagem de tarefas.
-- [x] Deve ser possível buscar tarefas por título.
-- [x] Deve ser possível filtrar tarefas na listagem.
-- [x] Deve ser possível implementar autenticação de usuários.
+Currently, two official plugins are available:
 
-## RNs (Regras de Negócio)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- [x] A tarefa só pode ser atualizada ou excluída pelo usuário que a criou.
-- [x] Tarefas devem ter um título e uma descrição para serem criadas.
-- [x] O acesso para criar, atualizar e excluir tarefas é restrito a usuários autenticados.
-- [x] A paginação da listagem de tarefas deve conter 20 itens por página.
-- [x] A busca e os filtros na listagem de tarefas devem ser insensíveis a maiúsculas e minúsculas.
+## Expanding the ESLint configuration
 
-## RNFs (Requisitos Não Funcionais)
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- [ ] A interface do usuário deve ser desenvolvida utilizando React.js e Material UI.
-- [ ] O sistema deve validar os dados do usuário tanto no front-end quanto no back-end.
-- [x] A aplicação deve implementar segurança na autenticação dos usuários com JWT (JSON WEB TOKEN).
-- [x] O back-end deve ser desenvolvido em Node.js, TypeScript, utilizando o Banco de Dados Acebasse e Express.
-- [x] A senha do usuário precisa estar criptografada.
-- [x] Os dados da aplicação precisam estar persistidos em um banco Acebase.
-- [x] Todas listas de dados precisam estar paginadas com 20 itens por página.
-- [x] O usuário deve ser identificado por um JWT(JSON WEB TOKEN).
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default {
+  // other rules...
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
+    tsconfigRootDir: __dirname,
+  },
+}
+```
+
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
