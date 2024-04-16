@@ -35,6 +35,7 @@ export class AcebaseUsersRepository implements UsersRepository {
       id: data.id ?? taskId,
       name: data.name,
       email: data.email,
+      isCompleted: data.isCompleted ?? false,
       password_hash: data.password_hash,
       created_at: new Date(),
       updated_at: new Date(),

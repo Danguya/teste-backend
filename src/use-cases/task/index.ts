@@ -10,6 +10,7 @@ interface TaskUseCaseRequest {
   title: string
   description: string
   userId: string
+  isCompleted?: boolean
 }
 
 interface TaskUseCaseResponse {
@@ -25,6 +26,7 @@ export class TaskUseCase {
     title,
     description,
     userId,
+    isCompleted,
   }: TaskUseCaseRequest): Promise<TaskUseCaseResponse> {
     if (title === '') {
       throw new EmptyTaskTitleError()
@@ -51,6 +53,7 @@ export class TaskUseCase {
       title,
       description,
       userId,
+      isCompleted,
     })
 
     return {

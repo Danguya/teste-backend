@@ -1,22 +1,32 @@
-import { styled } from "@mui/material";
+import { styled } from '@mui/material'
 
 export const Wrapper = styled('div')`
   display: grid;
   place-items: center;
   height: 100vh;
-  background-color: #f1f3f5;
+  background-color: #fff;
+  padding-top: 30px;
+  padding: 40px 24px;
+
   form {
-    background-color: #fff;
-    padding: 32px;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 24px;
-    max-width: 300px;
+    max-width: 350px;
     width: 100%;
-
+    .TextField {
+      width: 100%;
+    }
     h2 {
-      text-align: center;
+      color: #0d0c22;
+      width: 100%;
+      margin-bottom: 8px;
     }
   }
-`;
+
+  @media (min-width: 425px) {
+    padding: 40px;
+  }
+`

@@ -25,7 +25,6 @@ export async function destroyTasksRoute(request: Request, response: Response) {
         .status(401)
         .json({ message: 'Usuário não tem permissão para isto.' })
     }
-    console.log(error)
     return response.status(500).send({ message: 'Internal server error.' })
   }
 }

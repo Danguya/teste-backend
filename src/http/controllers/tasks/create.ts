@@ -9,14 +9,18 @@ export async function createTaskRoute(request: Request, response: Response) {
     const createTaskBodySchema = z.object({
       title: z.string(),
       description: z.string(),
+      isCompleted: z.coerce.boolean().optional(),
     })
 
-    const { title, description } = createTaskBodySchema.parse(request.body)
+    const { title, description, isCompleted } = createTaskBodySchema.parse(
+      request.body,
+    )
 
     const createTaskUseCase = makeCreateTaskUseCase()
     const { task } = await createTaskUseCase.execute({
       title,
       description,
+      isCompleted,
       userId: request.userId,
     })
 

@@ -1,8 +1,15 @@
-import { User, Wrapper } from "./style";
-import avatarImg from '../../assets/avatar.jpg';
-import { useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
-import AddTaskModal from "../TaskModal/AddTask";
+import { User, Wrapper } from './style'
+import avatarImg from '../../assets/avatar.jpg'
+import { useState } from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import AddTaskModal from '../TaskModal/AddTask'
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+} from '@mui/material'
+import { Button } from '../Button'
 
 type UserTypes = {
   username: string
@@ -12,21 +19,19 @@ type UserTypes = {
 type HeaderProps = {
   user: UserTypes
 }
-export default function Header({user}:HeaderProps) {
-  const [open, setOpen] = useState(false);
+export default function Header({ user }: HeaderProps) {
+  const [open, setOpen] = useState(false)
+  const [modalConfirmLogout, setModalConfirmLogout] = useState(false)
 
-  const {signOut} = useAuth()
-
+  const { signOut } = useAuth()
 
   const handleOpen = () => {
-    setOpen(true);
-  };
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-  };
-
-
+    setOpen(false)
+  }
 
   return (
     <Wrapper>
@@ -47,11 +52,26 @@ export default function Header({user}:HeaderProps) {
         <button className="add_task" onClick={handleOpen}>
           Adicionar Tarefa
         </button>
-        <button onClick={signOut}>
+        <button onClick={() => setModalConfirmLogout(true)}>
           Terminar Sessão
         </button>
       </div>
       <AddTaskModal handleClose={handleClose} open={open} />
+      <Dialog
+        open={modalConfirmLogout}
+        onClose={() => setModalConfirmLogout(false)}
+      >
+        <DialogTitle>Terminar Sessão</DialogTitle>
+        <DialogContent>
+          Tem a certeza que pretende terminar esta sessão?
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setModalConfirmLogout(false)}>Não</Button>
+          <Button onClick={signOut} color="error">
+            Sim
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Wrapper>
   )
 }

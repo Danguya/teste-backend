@@ -1,14 +1,14 @@
-import { styled } from "@mui/material";
+import { styled } from '@mui/material'
 
 export const Wrapper = styled('header')`
   background-color: #1864ab;
   height: 71px;
-  color:#fff;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px 20px;
-  .logo{
+  .logo {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,17 +30,16 @@ export const Wrapper = styled('header')`
       cursor: pointer;
       transition: 0.3s ease-in-out;
     }
-    button.add_task{
+    button.add_task {
       background: #202020;
       border-radius: 4px;
       padding: 8px 16px;
-      &:hover{
+      &:hover {
         background-color: #181818;
       }
     }
   }
-
-`;
+`
 
 export const User = styled('div')`
   display: flex;
@@ -50,16 +49,16 @@ export const User = styled('div')`
   border-radius: 9px;
   transition: 0.3s ease;
   cursor: pointer;
-  &:hover{
+  &:hover {
     background-color: #339af0;
   }
 
-  .avatar{
+  .avatar {
     height: 40px;
     width: 40px;
     border-radius: 50%;
     background-color: #fff;
-    img{
+    img {
       width: 100%;
       object-fit: cover;
       border-radius: 100%;

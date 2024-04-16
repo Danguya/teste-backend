@@ -1,6 +1,5 @@
 import { OperationNotPermitedError } from '@/use-cases/errors/operation-not-permited-error'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found'
-import { TaskAlreadyExistsError } from '@/use-cases/errors/task-already-exists-error'
 import { makeUpdateTasksUseCase } from '@/use-cases/factories/make-update-tasks-use-case'
 import { Response, Request } from 'express'
 import { z } from 'zod'
@@ -10,10 +9,8 @@ export async function updateTasksRoute(request: Request, response: Response) {
     const updateTasksBodySchema = z.object({
       title: z.string().optional(),
       description: z.string().optional(),
-      isCompleted: z.boolean().optional(),
+      isCompleted: z.coerce.boolean().optional(),
     })
-    console.log('Test')
-
     const { description, isCompleted, title } = updateTasksBodySchema.parse(
       request.body,
     )
@@ -38,7 +35,6 @@ export async function updateTasksRoute(request: Request, response: Response) {
         .status(401)
         .json({ message: 'Usuário não tem permissão para isto.' })
     }
-    console.log(error)
     return response.status(500).send({ message: 'Internal server error.' })
   }
 }

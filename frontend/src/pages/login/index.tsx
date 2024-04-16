@@ -1,45 +1,51 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Box, TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-import { Link, useNavigate } from 'react-router-dom';
-import { Wrapper } from './style';
+import { Box, TextField } from '@mui/material'
+import { Link, useNavigate } from 'react-router-dom'
+import { Wrapper } from './style'
 import { useForm } from 'react-hook-form'
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
-import { useAuth } from '../../hooks/useAuth';
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useState } from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import { Button } from '../../components/Button'
+import { Label } from '../../components/Label'
+import Message from '../../components/Message'
+import { LoginSchema } from '../../schemas/login'
 
-const schema = z.object({
-  email: z.string().email("E-mail não é válido!"),
-  password: z.string().min(6, "A senha deve ter no mínimo 6 caracteres")
-})
-type FormValues = z.infer<typeof schema>
+type FormValues = z.infer<typeof LoginSchema>
 
 export default function Login() {
-
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const { signIn } = useAuth();
+  const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
+  const { signIn } = useAuth()
   const form = useForm<FormValues>({
     defaultValues: {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     },
-    resolver: zodResolver(schema)
+    resolver: zodResolver(LoginSchema),
   })
   const { register, handleSubmit, formState } = form
   const { errors } = formState
 
-  const onSubmit = async(data: FormValues) => {
+  const onSubmit = async (data: FormValues) => {
     try {
-      const {email, password} = data
-      await signIn({email, password})
+      setIsLoading(true)
+      const { email, password } = data
+      await signIn({ email, password })
       navigate('/')
     } catch (error: any) {
-      const msg = error.response?.data?.message || "An error occurred"
-      if(msg === "Invalid credentials."){
-        setError("E-mail ou senha errada!")
+      const messageError =
+        error.response?.data?.message ||
+        'Por favor verifique a sua conexão com a internet.'
+      if (messageError === 'Invalid credentials.') {
+        setError(
+          'Não foi possível encontrar uma conta que corresponda ao e-mail e à senha que você digitou.',
+        )
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -51,31 +57,51 @@ export default function Login() {
         autoComplete="off"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h2>Login no Sistema</h2>
-        <TextField
-          id="outlined-basic"
-          label="email"
-          variant="outlined"
-          {...register("email")
-          }
-          error={!!errors.email}
-          helperText={errors.email?.message}
+        <h2>Faça login no Tasktop</h2>
+        <Box
+          width={'100%'}
+          sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+        >
+          <Label htmlFor="password">E-mail</Label>
+          <TextField
+            InputProps={{
+              sx: { borderRadius: '9px' },
+            }}
+            className="TextField"
+            placeholder="Seu endereço de e-mail"
+            variant="outlined"
+            {...register('email')}
+            error={!!errors.email}
+            helperText={errors.email?.message}
           />
+        </Box>
 
-        <TextField
-          id="outlined-basic"
-          type='password'
-          label="senha"
-          variant="outlined"
-          {...register("password")
-          }
-          error={!!errors.password}
-          helperText={errors.password?.message}
+        <Box
+          width={'100%'}
+          sx={{ display: 'flex', flexDirection: 'column', gap: '8px' }}
+        >
+          <Label htmlFor="password">Senha</Label>
+          <TextField
+            className="TextField"
+            type="password"
+            variant="outlined"
+            placeholder="Sua senha secreta"
+            InputProps={{
+              sx: { borderRadius: '9px' },
+            }}
+            {...register('password')}
+            error={!!errors.password}
+            helperText={errors.password?.message}
           />
-        {error && <p>{error}</p>}
-        <Button type='submit' variant="outlined" style={{'height':'48px'}} >Entrar</Button>
-         <p>Ir a página de <Link to={'/register'}>registro</Link></p>
+        </Box>
+        <Button disabled={isLoading} type="submit">
+          {isLoading ? 'Processando...' : 'Entrar'}
+        </Button>
+        <p>
+          Não tem uma conta? <Link to={'/register'}>Inscreva-se</Link>
+        </p>
       </Box>
+      <Message show={!!error}>{error}</Message>
     </Wrapper>
   )
 }

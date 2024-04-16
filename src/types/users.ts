@@ -10,4 +10,5 @@ export type UserCreateInput = {
   name: string
   email: string
   password_hash: string
+  isCompleted?: boolean
 }
