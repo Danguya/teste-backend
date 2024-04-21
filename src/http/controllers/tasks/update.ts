@@ -9,7 +9,7 @@ export async function updateTasksRoute(request: Request, response: Response) {
     const updateTasksBodySchema = z.object({
       title: z.string().optional(),
       description: z.string().optional(),
-      isCompleted: z.coerce.boolean().optional(),
+      isCompleted: z.coerce.number().optional(),
     })
     const { description, isCompleted, title } = updateTasksBodySchema.parse(
       request.body,
@@ -20,7 +20,7 @@ export async function updateTasksRoute(request: Request, response: Response) {
     const { task } = await updateTasksUseCase.execute({
       taskId,
       description,
-      isCompleted,
+      isCompleted: Boolean(isCompleted),
       title,
       userId: request.userId,
     })
@@ -35,6 +35,7 @@ export async function updateTasksRoute(request: Request, response: Response) {
         .status(401)
         .json({ message: 'Usuário não tem permissão para isto.' })
     }
+    return response.status(500).send({ error })
     return response.status(500).send({ message: 'Internal server error.' })
   }
 }

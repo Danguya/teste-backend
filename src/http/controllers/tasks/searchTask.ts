@@ -23,6 +23,7 @@ export async function searchTasksRoute(request: Request, response: Response) {
     if (error instanceof ResourceNotFoundError) {
       return response.status(404).json({ message: error.message })
     }
+    return response.status(500).send({ error })
     return response.status(500).send({ message: 'Internal server error.' })
   }
 }
