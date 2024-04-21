@@ -77,6 +77,7 @@ export class AcebaseTasksRepository implements TasksRepository {
   }
 
   async save(task: Task) {
+    console.log(task)
     const ref = await acebase.ref(`tasks/${task.id}`).update(task)
 
     const snapshot = await ref.get()

@@ -56,6 +56,7 @@ export class UpdateTaskUseCase {
     }
 
     if (isCompleted !== undefined && isCompleted !== null) {
+      console.log('COMP', isCompleted)
       task.isCompleted = isCompleted
       task.updated_at = new Date()
     }
