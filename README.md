@@ -22,8 +22,8 @@
 
 ## RNFs (Requisitos Não Funcionais)
 
-- [ ] A interface do usuário deve ser desenvolvida utilizando React.js e Material UI.
-- [ ] O sistema deve validar os dados do usuário tanto no front-end quanto no back-end.
+- [x] A interface do usuário deve ser desenvolvida utilizando React.js e Material UI.
+- [x] O sistema deve validar os dados do usuário tanto no front-end quanto no back-end.
 - [x] A aplicação deve implementar segurança na autenticação dos usuários com JWT (JSON WEB TOKEN).
 - [x] O back-end deve ser desenvolvido em Node.js, TypeScript, utilizando o Banco de Dados Acebasse e Express.
 - [x] A senha do usuário precisa estar criptografada.
